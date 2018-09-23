@@ -2,8 +2,8 @@
 age[c(-5, -11)] ==  age[c(1, 2, 3, 4, 6, 7, 8, 9, 10, 12)] == age[!is.na(age)]
 
 #import
-library(tidy verse)
-papers <- as_tibble(read_csv(“filepath”))
+library(tidyverse)
+papers <- as_tibble(read_csv(???filepath???))
 papers_select <- select(papers, journal, year, cites, title, au1)
 
 summary(filter(papers, cites >= 100))
