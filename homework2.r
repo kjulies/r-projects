@@ -40,3 +40,8 @@ ggplot(binom, aes(x=x, y=prob)) + geom_col() + ylab("Analytical Density")
 df_with_cdf <- binom %>%
                mutate(cdf=cumsum(prob))
 ggplot(df_with_cdf, aes(x=x, y=cdf)) + geom_step() + ylab("CDF")
+
+#Plotting histogram and density with ggplot
+ggplot(binom, aes(x))+
+  geom_histogram(data=binom, aes(x, ..density..), fill="white", color="darkred")+
+  geom_density(kernel="gaussian", aes(x))
