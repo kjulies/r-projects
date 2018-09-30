@@ -22,3 +22,27 @@ length(unique(sample$V2))
 which(sample$V3 == "Eugene Barchas")
 length(which(sample$V3 == "Eugene Barchas"))
 
+#check data type
+is.matrix(sample)
+is.data.frame(sample)
+
+#manipulate data
+sample_mtx <- as.matrix(sample)
+is.matrix(sample_mtx)
+
+a <- matrix(1,2,3)
+a
+is.matrix(a)
+as.data.frame(a)
+
+#transpose
+t(a)
+a
+
+#delete/add a row/columns
+a <- a[-1,]
+a
+a <- rbind(a, c(2,2,2)) #add row
+a
+a <- cbind(a, c(2,3)) #add col
+a
