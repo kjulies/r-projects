@@ -1,5 +1,8 @@
 # setting directory
-setwd("~/Desktop/projects/r-projects")
+#setwd("~/Desktop/projects/r-projects")
+
+#clean environment memory in R
+rm(list = ls())
 
 #import data
 sample <- read.csv("sample.csv", header = FALSE)
@@ -10,6 +13,10 @@ sample <- read.csv("sample.csv", header = FALSE)
 #assess data
 summary(sample)
 nrow(sample)
+head(sample)
+tail(sample)
+str(sample) #show structure of R object
+dim(sample) #dimensions
 
 #counting
 max(sample$V4)
