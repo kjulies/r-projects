@@ -1,0 +1,90 @@
+---
+title: "R Basics"
+output: html_document
+---
+
+#####Setting the root directory
+```{r}
+setwd("~/Desktop/projects/r-projects")
+```
+
+
+#####Clean environment memory in R
+```{r}
+rm(list = ls())
+```
+
+
+#####Import data
+```{r}
+sample <- read.csv("sample.csv", header = FALSE)
+
+#In case the a table is a txt file..
+#sample <- read.table("sample.txt", sep=",", header = FALSE)
+```
+
+
+#####Assess data
+```{r}
+summary(sample)
+nrow(sample)
+head(sample)
+tail(sample)
+str(sample) #show structure of R object
+dim(sample) #dimensions
+```
+
+
+#####Counting
+```{r}
+max(sample$V4)
+min(sample$V5)
+unique(sample$V3)
+sort(unique(sample$V3))
+length(unique(sample$V3))
+```
+
+
+#####Queries
+```{r}
+which(sample$V3 == "Eugene Barchas")
+length(which(sample$V3 == "Eugene Barchas"))
+```
+
+
+#####Check data type
+```{r}
+is.matrix(sample)
+is.data.frame(sample)
+```
+
+
+#####Manipulate data
+```{r}
+sample_mtx <- as.matrix(sample)
+is.matrix(sample_mtx)
+
+a <- matrix(1,2,3)
+a
+is.matrix(a)
+as.data.frame(a)
+```
+
+
+#####Transpose
+```{r}
+t(a)
+a
+```
+
+#####Delete/add a row/columns
+```{r}
+a <- a[-1,]
+a
+a <- rbind(a, c(2,2,2)) #add row
+a
+a <- cbind(a, c(2,3)) #add col
+a
+```
+
+
