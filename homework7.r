@@ -73,3 +73,17 @@ print(2 * (1 - pnorm(t_stat))) #near to zero
 #confident interval for 95%
 print(actual_stat-1.96*sqrt(Vneyman))
 print(actual_stat+1.96*sqrt(Vneyman))
+
+
+### Plotting Kernel Regression ###
+# (using np, ggplot doesn't have kernel regression)
+#install.packages('np')
+library(np)
+bw_004 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 0.04)
+plot(bw_004)
+bw_0001 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 0.001)
+plot(bw_0001)
+bw_1 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 1)
+plot(bw_1)
+bw_20 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 20)
+plot(bw_20)
