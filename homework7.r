@@ -87,3 +87,14 @@ bw_1 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 1)
 plot(bw_1)
 bw_20 = npreg(xdat=schools$open, ydat=schools$pctpostwritten, bws = 20)
 plot(bw_20)
+
+
+### Plotting CDFs to know FSD ###
+#CDF: cumulative density function
+#FSD: first stochastic dominate
+library(tidyverse)
+cdf_treatment = ecdf(schools$treatment*schools$teacherscore)
+cdf_control = ecdf(schools$control*schools$teacherscore)
+#plot(cdf_treatment, col='blue')
+plot.ecdf(schools$treatment*schools$teacherscore, col='blue')
+lines(cdf_control, col='red')
