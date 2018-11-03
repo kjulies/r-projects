@@ -93,8 +93,15 @@ plot(bw_20)
 #CDF: cumulative density function
 #FSD: first stochastic dominate
 library(tidyverse)
+
+#Incorrect way
 cdf_treatment = ecdf(schools$treatment*schools$teacherscore)
 cdf_control = ecdf(schools$control*schools$teacherscore)
 #plot(cdf_treatment, col='blue')
 plot.ecdf(schools$treatment*schools$teacherscore, col='blue')
 lines(cdf_control, col='red')
+
+#Correct way
+schools$group[schools$treatment==1] <-"T"
+schools$group[schools$treatment==0] <-"C"
+ggplot(schools, aes(pctpostwritten,colour = group)) + stat_ecdf()
