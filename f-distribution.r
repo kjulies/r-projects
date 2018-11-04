@@ -1,10 +1,12 @@
-# Unrestricted: y = b_0 + b_1*x_1 + b_2*x_2 + b_3*x_3 + b_4*x_4
-# Restricted:   y = b_0 + b_3*x_3 + b_4*x_4
 #
 # Testing: 
 #
 # H_0:             b_1 = b_2 = 0   <= null hyphotesis
 # H_Alternative:   b_1 != 0 or b_2 != 0
+#
+# So:
+# Unrestricted: y = b_0 + b_1*x_1 + b_2*x_2 + b_3*x_3 + b_4*x_4
+# Restricted:   y = b_0 + b_3*x_3 + b_4*x_4
 
 # We are given this data
 SSR_R <- 198.3 #sum squares residual for restricted
