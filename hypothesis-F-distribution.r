@@ -21,7 +21,7 @@ F_critical_value = qf(alpha, r, n-(k+1), lower.tail = FALSE)
 F_statistic = ((SSR_R - SSR_U)/r)/(SSR_U/(n-(k+1)))
 
 print(F_critical_value)
-print(F_statictic)
+print(F_statistic)
 
 if (F_stat > F_critical_value){
   print("Reject de null hyphotesis")

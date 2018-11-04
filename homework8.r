@@ -49,5 +49,34 @@ print(mean_black-mean_no_black) #equals to black coefficient
 summary(fit2)
 t_statistic <- -0.16554/0.02744
 
-# Other:
-anova(fit2) #gives us: SSR, SST, degrees freedom, F value, p-value, ...
+##########
+# Part 3 #
+##########
+# Testing: log(wage_i) = b_0 + b_1*yrs_school + b_2*ttl_exp + error_i
+#
+fit3 <- lm(lwage~yrs_school+ttl_exp, data=data)
+r2 <- summary(fit3)$r.squared
+print(r2) # tell us: 26.7% of the total variance in the logarithm of the wage
+          # is explained by the years of schooling and the total experience
+
+# Testing:
+#
+# Years school counts double over total experience, so:  2*b_1 = b_2
+#
+# Restricted model:  log(wage_i) = b_0 + b_1*(yrs_school + 2*ttl_exp) + error_i
+#
+data$yrs_exp <- data$yrs_school+ 2*data$ttl_exp
+restricted_fit3 <- lm(lwage~yrs_exp, data=data)
+summary(restricted_fit3) # so, b_1 will value 0.026292
+
+# Use 'anova' to calculate ((SSR_r - SSR_u)/r) / (SSR_u/(n - k - 1))
+anova_rest = anova(restricted_fit3) #gives us: SSR, SST, degrees freedom, F value, p-value, ...
+anova_unrest = anova(fit3)
+
+SSR_r <- anova_rest$`Sum Sq`[2]
+SSR_u <- anova_unrest$`Sum Sq`[3]
+n_minus_k_plus_1 <- anova_unrest$Df[3] #be careful, it's not counting k+1
+f_test_statistic <- ((SSR_r - SSR_u)/r) / (SSR_u/(n_minus_k_plus_1))
+f_test_statistic
+p_value <- df(f_test_statistic, df1 = 1, df2 = n_minus_k_plus_1)
+p_value
