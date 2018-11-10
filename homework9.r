@@ -24,4 +24,6 @@ model3 = lm(formula = wage_st ~ state, data = fastfood)
 summary(model3)
 
 # avg starting wage (state=0) = 4.62863
-# avg starting wage (state=1) = 4.62863 + 1*(-0.02123) = 4.60707
+# avg starting wage (state=1) = b_0 + b_1*S = 4.62863 + (-0.02123)*1 = 4.60707
+# Can we reject the null hypothesis that the avg starting wage is the same in state=1 and state=0?
+#    No, we CAN'T because the p-value of null hypothesis (when b_1 = 0) is 0.638 (big for typical confidence levels)
