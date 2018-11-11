@@ -99,4 +99,6 @@ model7 = lm(myoutcomenext ~ positive_difshare +
                             positive_difshare*difshare + positive_difshare*I(difshare^2) + positive_difshare*I(difshare^3), 
                             data=subset_indiv_final)
 
-
+# From model1 to model4 we see the effects of positive_difshare is greater than 0.6
+# All the models has a p-value (on positive_difshare) < 0.001 so we can reject the null at 99% level.
+#   This means we cannot say there's no effect between positive_difshare and the outcome
