@@ -3,6 +3,10 @@ rm(list = ls())
 
 #setwd("Desktop/projects/r-projects/")
 
+##########
+# Part 1 #  Difference in Difference
+##########  ========================
+
 # load csv file
 fastfood <- read.csv("fastfood.csv", header = TRUE, row.names = NULL)
 fastfood
@@ -38,3 +42,20 @@ summary(model4) #error, not estimable because state, pa1 and pa2 are collinear
 model5 = lm(formula = empft2 - empft ~ state , data = fastfood)
 summary(model5) # DiD = 3.443
 
+
+##########
+# Part 2 #  Regression Discontinuity
+##########  ========================
+
+# clean
+rm(list = ls())
+
+#install.packages("rdd")
+library(rdd)
+
+# load csv file
+indiv_final <- read.csv("indiv_final.csv", header = TRUE, row.names = NULL)
+
+#if difshare > 0, then 1. Create dummy.
+indiv_final$same <- as.numeric(indiv_final$difshare > 0)
+DCdensity(indiv_final$difshare)
