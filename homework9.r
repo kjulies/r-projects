@@ -57,5 +57,46 @@ library(rdd)
 indiv_final <- read.csv("indiv_final.csv", header = TRUE, row.names = NULL)
 
 #if difshare > 0, then 1. Create dummy.
-indiv_final$same <- as.numeric(indiv_final$difshare > 0)
-DCdensity(indiv_final$difshare)
+indiv_final$positive_difshare <- as.numeric(indiv_final$difshare > 0)
+mean(indiv_final$positive_difshare)
+
+DCdensity(indiv_final$difshare, ext.out=TRUE)
+# Difference in the log estimate in heights at the cutpoint?
+#   ext.out=TRUE to see all the calculated values.
+#   log estimate = theta = -0.002470001
+#
+#   p-value = 0.9620681   so we CAN'T reject the null (difference in cutoff is 0)
+
+
+# keep only the observations within 50 percentage points of the cutoff
+#    this means diffshare between -0.5 and 0.5 (cutoff is 0 by default)
+subset_indiv_final = subset(indiv_final,  -0.5 < difshare & difshare < 0.5)
+DCdensity(subset_indiv_final$difshare, ext.out=TRUE)
+
+# create models to test
+model1 = lm(myoutcomenext ~ positive_difshare, 
+                            data=subset_indiv_final)
+
+model2 = lm(myoutcomenext ~ positive_difshare + difshare, 
+                            data=subset_indiv_final)
+
+model3 = lm(myoutcomenext ~ positive_difshare + difshare + positive_difshare*difshare, 
+                            data=subset_indiv_final)
+
+model4 = lm(myoutcomenext ~ positive_difshare + difshare + I(difshare^2), 
+                            data=subset_indiv_final)
+
+model5 = lm(myoutcomenext ~ positive_difshare + difshare + I(difshare^2) + 
+                            positive_difshare*difshare + positive_difshare*I(difshare^2), 
+                            data=subset_indiv_final)
+
+model6 = lm(myoutcomenext ~ positive_difshare + 
+                            difshare + I(difshare^2)+ I(difshare^3), 
+                            data=subset_indiv_final)
+
+model7 = lm(myoutcomenext ~ positive_difshare + 
+                            difshare + I(difshare^2)+ I(difshare^3) + 
+                            positive_difshare*difshare + positive_difshare*I(difshare^2) + positive_difshare*I(difshare^3), 
+                            data=subset_indiv_final)
+
+
