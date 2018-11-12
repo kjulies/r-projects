@@ -102,3 +102,19 @@ model7 = lm(myoutcomenext ~ positive_difshare +
 # From model1 to model4 we see the effects of positive_difshare is greater than 0.6
 # All the models has a p-value (on positive_difshare) < 0.001 so we can reject the null at 99% level.
 #   This means we cannot say there's no effect between positive_difshare and the outcome
+
+# estimate the effect non-parametrically. What is the point estimate?
+RDestimate(myoutcomenext ~ difshare, data=subset_indiv_final) #LATE = 0.4707
+# also returns estimates of half and double of the optimal bandwidth
+
+
+# plotting using different bandwith (from smaller to largest)
+summary(RDestimate(myoutcomenext ~ difshare, data=subset_indiv_final)) #bandwidth = 0.11982
+
+bandwidth <- 0.11982
+m1 <- RDestimate(myoutcomenext ~ difshare, data=indiv_final, subset=abs(indiv_final$difshare) <= 0.5, bw = bandwidth/3) #other option:  kernel="rectangular"
+plot(m1)
+m2 <- RDestimate(myoutcomenext ~ difshare, data=indiv_final, subset=abs(indiv_final$difshare) <= 0.5)
+plot(m2)
+m3 <- RDestimate(myoutcomenext ~ difshare, data=indiv_final, subset=abs(indiv_final$difshare) <= 0.5, bw = 3*bandwidth)
+plot(m3)
