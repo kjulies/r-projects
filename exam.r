@@ -63,4 +63,8 @@ ggplot(df)+
   geom_histogram(data=df5, aes(mean, ..density..), color="orange", binwidth = 0.01)+
   geom_histogram(data=df10, aes(mean, ..density..), color="yellow", binwidth = 0.01)+
   geom_histogram(data=df30, aes(mean, ..density..), color="green", binwidth = 0.01)
-  
+
+
+##### Comparing the ratio of how decrease the starndard error ###
+sd(df30$mean)
+sd(df5$mean)/sqrt(6)
